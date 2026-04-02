@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    background-color: #111; /* dark theme */
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+#timer {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    font-size: 18px;
+    z-index: 10;
+}
+
+#arena {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 500px;
+    background-color: #1a1a1a;
+    border: 3px solid #444;
+    overflow: hidden;
+}
+
+#player {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: red;
+    top: 400px;   /* bottom-left spawn */
+    left: 20px;
+    border-radius: 4px;
+}
+
+.collider {
+    position: absolute;
+    background-color: #555;
+}
+
+#top {
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 10px;
+}
+
+#ver-left {
+    top: 60px;
+    left: calc(50% - 400px);
+    width: 10px;
+    height: 500px;
+}
+
+#ver-right {
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 100%;
+}
+
+#b-left {
+    top: 560px;
+    left: calc(50% - 400px);
+    width: 390px;
+    height: 10px;
+}
+#b-right {
+    top: 560px;
+    left: calc(50% + 10px);
+    width: 390px;
+    height: 10px;
+}
