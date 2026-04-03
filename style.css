@@ -23,6 +23,26 @@ body {
     font-size: 18px;
     z-index: 10;
 }
+.level{
+    position: absolute;
+    top: 10px;
+    left: 28%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    font-size: 18px;
+    z-index: 10;
+}
+#levType{
+    position: absolute;
+    top: 10px;
+    left: 72%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    font-size: 18px;
+    z-index: 10;
+}
 
 #arena {
     position: absolute;
@@ -31,7 +51,7 @@ body {
     transform: translateX(-50%);
     width: 800px;
     height: 500px;
-    background-color: #1a1a1a;
+    background-color: #fefefe;
     border: 3px solid #444;
     overflow: hidden;
 }
@@ -52,15 +72,15 @@ body {
 }
 
 #top {
-    top: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 800px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 10px;
 }
 
 #ver-left {
-    top: 60px;
+    top: 0;
     left: calc(50% - 400px);
     width: 10px;
     height: 500px;
@@ -74,14 +94,49 @@ body {
 }
 
 #b-left {
-    top: 560px;
-    left: calc(50% - 400px);
+    top: 485px;
+    left: calc(50% - 410px);
     width: 390px;
     height: 10px;
 }
 #b-right {
-    top: 560px;
+    top: 485px;
     left: calc(50% + 10px);
     width: 390px;
     height: 10px;
+}
+#cntr-col1{
+    top: 65px;
+    right: 14.5rem;
+    width: 10px;
+    height: 20rem;
+}
+#cntr-col2{
+    top: 15rem;
+    right: 24.5rem;
+    width: 20rem;
+    height: 10px;
+}
+.orbs{
+    position: absolute;
+    box-shadow: 0 0 10px green;
+    background-color: greenyellow;
+    border-radius: 200%;
+    height: 40px;
+    width: 40px; 
+    opacity: 50%;
+    
+}
+
+#orb1{
+    top: 10rem;
+    right: 33.5rem;
+}
+#orb2{
+    top: 22rem;
+    right: 22.5rem;
+}
+#orb3{
+    top: 10rem;
+    right: 5.5rem;
 }
