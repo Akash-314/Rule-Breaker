@@ -127,7 +127,6 @@ body {
     opacity: 50%;
     
 }
-
 #orb1{
     top: 10rem;
     right: 33.5rem;
@@ -139,4 +138,14 @@ body {
 #orb3{
     top: 10rem;
     right: 5.5rem;
+}
+.end{
+    position: absolute;
+    background-color: rgb(255, 255, 71);
+    border: 2px dashed goldenrod;
+    border-radius: 10%;
+    height: 60px;
+    width: 60px;  
+    top: 2.5rem;
+    right: 3.5rem;
 }

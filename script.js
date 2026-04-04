@@ -1,10 +1,52 @@
-let players = document.getElementById("player");
+let players;
 const arena = document.getElementById("arena");
 let timer = document.getElementById("tym");
-let col1 = document.getElementById("cntr-col1");
-let col2 = document.getElementById("cntr-col2");
-const walls = document.querySelectorAll(".collider");
-const orbs = document.querySelectorAll(".orbs");
+let collected = 0;
+let total = 0;
+
+// load level
+let currentLevel = 0;
+
+function loadLevel() {
+    const level = levels[currentLevel];
+    const arena = document.getElementById("arena");
+    collected = 0;
+    total = level.orbs.length;
+    
+    // clear old stuff
+    arena.innerHTML = '<div id="player"></div>';
+    
+    players = document.getElementById("player");
+    
+    // set player position
+    posX = level.players.x;
+    posY = level.players.y;
+    updatePosition();
+    
+    // create walls
+    level.walls.forEach(w => {
+        let wall = document.createElement("div");
+        wall.classList.add("collider");
+        
+        wall.style.left = w.x + "px";
+        wall.style.top = w.y + "px";
+        wall.style.width = w.width + "px";
+        wall.style.height = w.height + "px";
+        arena.appendChild(wall);
+    });
+
+        // create orbs
+    level.orbs.forEach(o => {
+        let orb = document.createElement("div");
+        orb.classList.add("orbs");
+
+        orb.style.left = o.x + "px";
+        orb.style.top = o.y + "px";
+
+        arena.appendChild(orb);
+    });
+}
+loadLevel();
 
 //Timer
 let startTime = null;
@@ -27,18 +69,18 @@ document.addEventListener("keydown",function(e){
     if(e.code === "ArrowDown") newY += step;
     if(e.code === "ArrowLeft")newX -= step;
     if(e.code === "ArrowRight")newX += step;
-
+    
     if (!checkCollision(newX, posY)) {
-    posX = newX;
+        posX = newX;
     }
     if (!checkCollision(posX, newY)) {
         posY = newY;
     }
     checkOrbCollision();
-
-        // boundary();
-        updatePosition();
-    });
+    
+    // boundary();
+    updatePosition();
+});
 
 function updatePosition(){
     players.style.left = posX + "px";
@@ -47,7 +89,7 @@ function updatePosition(){
 function boundary() {
     const maxX = arena.clientWidth - players.clientWidth;
     const maxY = arena.clientHeight - players.clientHeight;
-
+    
     posX = Math.max(0, Math.min(posX, maxX));
     posY = Math.max(0, Math.min(posY, maxY));
 }
@@ -69,12 +111,13 @@ function checkCollision(newX, newY) {
         right: newX + players.offsetWidth,
         bottom: newY + players.offsetHeight
     };
+    const walls = document.querySelectorAll(".collider");
     for (let wall of walls) {
         const wallRect = {
-        left: wall.offsetLeft,
-        top: wall.offsetTop,
-        right: wall.offsetLeft + wall.offsetWidth,
-        bottom: wall.offsetTop + wall.offsetHeight
+            left: wall.offsetLeft,
+            top: wall.offsetTop,
+            right: wall.offsetLeft + wall.offsetWidth,
+            bottom: wall.offsetTop + wall.offsetHeight
         };
         if (isColliding(playerRect, wallRect)) {
             return true; // collision detected
@@ -84,18 +127,17 @@ function checkCollision(newX, newY) {
 }
 
 // power-ups    
-    let collected = 0;
-    let total = orbs.length;
-    function checkOrbCollision(newX, newY) {
-        const playerRect = {
-            left: posX,
-            top: posY,
-            right: posX + players.offsetWidth,
-            bottom: posY + players.offsetHeight
-        };
-        orbs.forEach((frag) => {
-                if (frag.style.display === "none") return;
-
+function checkOrbCollision() {
+    const orbs = document.querySelectorAll(".orbs");
+    const playerRect = {
+        left: posX,
+        top: posY,
+        right: posX + players.offsetWidth,
+        bottom: posY + players.offsetHeight
+    };
+    orbs.forEach((frag) => {
+        if (frag.style.display === "none") return;
+        
                 const fragRect = {
                     left: frag.offsetLeft,
                     top: frag.offsetTop,
@@ -110,4 +152,13 @@ function checkCollision(newX, newY) {
                     console.log("Collected:", collected);
                 }
             });
+            if (collected === total) {
+            console.log("All collected!");
+            currentLevel++;
+            if (currentLevel < levels.length) {
+                loadLevel();
+            } else {
+                alert("Game Complete 🎉");
+            }
+        }
         }
