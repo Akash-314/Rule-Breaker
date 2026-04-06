@@ -2,7 +2,7 @@ const levels = [
 
     // 🟢 LEVEL 1 — NORMAL
     {
-        players: { x: 20, y: 400 },
+        player: { x: 20, y: 400 },
 
         walls: [
             { x: 0, y: 0, width: 800, height: 10 },   // top

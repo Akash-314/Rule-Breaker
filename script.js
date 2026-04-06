@@ -8,8 +8,10 @@ let total = 0;
 let currentLevel = 0;
 
 function loadLevel() {
+    startTime = null;
+    document.querySelector(".level h1:last-child").innerText = currentLevel + 1;
     const level = levels[currentLevel];
-    const arena = document.getElementById("arena");
+    // const arena = document.getElementById("arena");
     collected = 0;
     total = level.orbs.length;
     
@@ -19,8 +21,8 @@ function loadLevel() {
     players = document.getElementById("player");
     
     // set player position
-    posX = level.players.x;
-    posY = level.players.y;
+    posX = level.player.x;
+    posY = level.player.y;
     updatePosition();
     
     // create walls
@@ -43,8 +45,18 @@ function loadLevel() {
         orb.style.left = o.x + "px";
         orb.style.top = o.y + "px";
 
+        orb.dataset.type = o.type || "normal";
         arena.appendChild(orb);
     });
+
+    // 🟨 create exit
+        let end = document.createElement("div");
+        end.classList.add("end");
+
+        end.style.left = level.end.x + "px";
+        end.style.top = level.end.y + "px";
+
+        arena.appendChild(end);
 }
 loadLevel();
 
@@ -161,4 +173,4 @@ function checkOrbCollision() {
                 alert("Game Complete 🎉");
             }
         }
-        }
+    }
